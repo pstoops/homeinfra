@@ -1,0 +1,42 @@
+---
+- name: Add UPG for ansible admin user
+  ansible.builtin.group:
+    name: "{{ __ADMINGRP }}"
+    gid: "{{ __ANSADMINUID }}"
+  become: true
+  tags:
+    - users
+
+- name: Add admin user
+  ansible.builtin.user:
+    name: "{{ __ANSADMIN }}"
+    uid: "{{ __ANSADMINUID }}"
+    group: "{{ __ADMINGRP }}"
+    state: present
+    shell: /bin/bash
+    append: true
+    createhome: true
+    groups: sudo
+    home: "/home/{{ __ANSADMIN }}"
+  become: true
+  tags:
+    - users
+
+- name: Authorize admin user SSH keys
+  ansible.posix.authorized_key:
+    user: "{{ __ANSADMIN }}"
+    key: "{{ __ANSADMINPUBKEY }}"
+  become: true
+  become_user: "{{ __ANSADMIN }}"
+  tags:
+    - users
+
+- name: Add ansible admin to sudoers
+  ansible.builtin.template:
+    src: sudoer_ansible.j2
+    dest: "/etc/sudoers.d/{{ __ANSADMIN }}"
+    owner: root
+    group: root
+    mode: '0440'
+  tags:
+    - users

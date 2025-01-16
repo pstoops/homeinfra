@@ -1,0 +1,7 @@
+## w10pro host variables
+# ansible_host: w10pro.home.taurus
+ansible_host: 192.168.1.27
+userlist:
+  - peter
+infra_functions:
+  - windowspc

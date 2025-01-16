@@ -1,0 +1,6 @@
+## urbanus host variables
+ansible_host: urbanus.home.taurus
+userlist:
+  - rune
+infra_functions:
+  - windowspc

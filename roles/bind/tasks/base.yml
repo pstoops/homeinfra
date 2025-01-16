@@ -1,0 +1,71 @@
+---
+- name: Install needed packages
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - "{{ bindsoftware }}"
+  tags:
+    - bind
+    - bind-base
+  notify: Restart bind
+
+- name: Create dirs for logs
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    owner: bind
+    group: bind
+    mode: '0755'
+  with_items:
+    - "{{ bindlogdir }}"
+  tags:
+    - bind
+    - bind-base
+  notify: Restart bind
+
+- name: Create files for logs
+  ansible.builtin.file:
+    path: "{{ bindlogdir }}/{{ item }}"
+    owner: bind
+    group: bind
+    mode: '0640'
+  with_items:
+    - client.log
+    - config.log
+    - database.log
+    - default.log
+    - dispatch.log
+    - dnssec.log
+    - general.log
+    - lame-servers.log
+    - network.log
+    - notify.log
+    - queries.log
+    - resolver.log
+    - security.log
+    - unmatched.log
+    - update.log
+    - xfer-in.log
+    - xfer-out.log
+  tags:
+    - bind
+    - bind-base
+  ignore_errors: "{{ ansible_check_mode }}"
+  notify: Restart bind
+
+- name: Create named configuration files
+  ansible.builtin.template:
+    src: "{{ item }}.j2"
+    dest: "{{ bindcfgdir }}/{{ item }}"
+    owner: root
+    group: bind
+    mode: '0640'
+  with_items:
+    - "named.conf.options"
+    - "named.conf.local"
+    - "named.conf.internal-zones"
+  tags:
+    - bind
+    - bind-base
+  notify: Restart bind

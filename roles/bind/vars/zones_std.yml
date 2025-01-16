@@ -1,0 +1,4 @@
+---
+standard_zones:
+  - domain: home.taurus
+    file: home.taurus.zone

@@ -1,0 +1,6 @@
+# {{ ansible_managed }}
+
+deb {{ apt_mirror }} bookworm main contrib non-free non-free-firmware
+deb http://security.debian.org/ bookworm-security non-free contrib main non-free-firmware
+deb {{ apt_mirror }} bookworm-updates non-free contrib main non-free-firmware
+deb {{ apt_mirror }} bookworm-backports main contrib non-free non-free-firmware

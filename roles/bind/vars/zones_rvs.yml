@@ -1,0 +1,4 @@
+---
+reverse_zones:
+  - domain: '1.168.192.in-addr.arpa'
+    file: '1.168.192.in-addr.arpa.zone'

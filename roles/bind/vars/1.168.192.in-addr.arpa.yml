@@ -1,0 +1,25 @@
+---
+ptr_1_168_192: {
+  6: "nucmgmt.home.taurus",
+  1: "udm.home.taurus",
+  2: "ngs324.home.taurus",
+  3: "hplj.home.taurus",
+  4: "diskstation.home.taurus",
+  5: "hpenvy.home.taurus",
+  10: "librefed.home.taurus",
+  11: "tplx200.home.taurus",
+  20: "nuc.home.taurus",
+  21: "tksnipeit.home.taurus",
+  23: "nucweb.home.taurus",
+  24: "nucldap.home.taurus",
+  31: "nucfed.home.taurus",
+  27: "w10pro.home.taurus",
+  60: "beest.home.taurus",
+  61: "urbanus.home.taurus",
+  99: "nuctst.home.taurus",
+  184: "nucadmin.home.taurus",
+  192: "nuccb1.home.taurus",
+  228: "nucdock.home.taurus",
+  230: "influxdb.home.taurus",
+  246: "azula.home.taurus"
+}

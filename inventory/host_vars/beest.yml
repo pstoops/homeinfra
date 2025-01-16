@@ -1,0 +1,6 @@
+## beest host variables
+ansible_host: beest.home.taurus
+userlist:
+  - tiego
+infra_functions:
+  - windowspc

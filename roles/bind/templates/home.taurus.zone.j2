@@ -1,0 +1,20 @@
+;{{ ansible_managed }}
+$ORIGIN .
+$TTL 86400	; 1 day
+home.taurus		IN SOA	nucmgmt.home.taurus. root.home.taurus. (
+				{{ bind9_serial_new }} ; Serial
+				300        ; refresh (5 minutes)
+				60         ; retry (1 minute)
+				604800     ; expire (1 week)
+				3600       ; minimum (1 hour)
+				)
+			NS	nucmgmt.home.taurus.
+			A	192.168.1.6
+			MX	10 nucmgmt.home.taurus.
+$ORIGIN home.taurus.
+{% for name, addr in AREC.items() %}
+{{ name }}			A	{{ addr }}
+{% endfor %}
+{% for name, addr in CNAME.items() %}
+{{ name }}			CNAME	{{ addr }}.
+{% endfor %}

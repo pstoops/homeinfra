@@ -1,0 +1,42 @@
+---
+- name: Get current bind9 serial
+  tags:
+    - bind
+    - bind-update
+  block:
+    - name: Slurp in current zone
+      ansible.builtin.slurp:
+        path: "{{ bindcfgdir }}/{{ zonefile }}"
+      register: bind9_current
+
+    - name: Filter out the serial
+      ansible.builtin.set_fact:
+        bind9_serial_concat: "{{ (bind9_current.content | b64decode | regex_search('[0-9]+[ ]+; Serial'))[0:10] }}"
+  rescue:
+    - name: Fallback to a default serial long time ago
+      ansible.builtin.set_fact:
+        bind9_serial_concat: "1970010100"
+
+- name: Split serial into date and counter part
+  ansible.builtin.set_fact:
+    bind9_serial_date: "{{ bind9_serial_concat[0:8] }}"
+    bind9_serial_counter: "{{ bind9_serial_concat[8:10] }}"
+  tags:
+    - bind
+    - bind-update
+
+- name: Calculate new serial when serialdate is today # noqa: jinja[spacing]
+  ansible.builtin.set_fact:
+    bind9_serial_new: "{{ now(fmt= '%Y%m%d') }}{{ '%02d' | format(bind9_serial_counter | int + 1) }}"
+  when: bind9_serial_date == now(fmt= "%Y%m%d")
+  tags:
+    - bind
+    - bind-update
+
+- name: Calculate new serial when serialdate is not today # noqa: jinja[spacing]
+  ansible.builtin.set_fact:
+    bind9_serial_new: "{{ now(fmt= '%Y%m%d') }}00"
+  when: bind9_serial_date != now(fmt= "%Y%m%d")
+  tags:
+    - bind
+    - bind-update

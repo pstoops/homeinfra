@@ -1,0 +1,6 @@
+## libredeb host variables
+ansible_host: libredeb.home.taurus
+userlist:
+  - peter
+infra_functions:
+  - desktop

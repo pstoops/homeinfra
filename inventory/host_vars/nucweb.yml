@@ -1,0 +1,4 @@
+## nucweb host variables
+ansible_host: nucweb.home.taurus
+infra_functions:
+  - webserver

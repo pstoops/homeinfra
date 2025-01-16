@@ -1,0 +1,14 @@
+{% for zonename, zonefile in standard_zones %}
+{zone "{{ zonename }}" IN {
+        type master;
+        file "{{ bindcfgdir }}/{{ zonefile }}";
+        allow-update { none; };
+};
+{% endfor %}
+{% for zonename, zonefile in reverse_zones %}
+{zone "{{ zonename }}" IN {
+        type master;
+        file "{{ bindcfgdir }}/{{ zonefile }}";
+        allow-update { none; };
+};
+{% endfor %}

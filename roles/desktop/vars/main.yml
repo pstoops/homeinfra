@@ -1,0 +1,52 @@
+---
+# vars file for desktop
+applist: [
+  'xfce4-goodies',
+  'xfce4',
+  'chromium',
+  'calibre',
+  'flameshot',
+  'geany',
+  'gpsbabel-gui',
+  'gpscorrelate',
+  'gpsprune',
+  'inkscape',
+  'qmapshack',
+  'scribus',
+  'thunar',
+  'transmission',
+  'viking',
+  'xsane',
+#  'sqlite3',
+  'htop',
+  # 'screen',
+  'i3',
+  'i3-wm',
+  'i3blocks',
+  'i3lock',
+  'i3lock-fancy',
+  'i3pystatus',
+  'i3status',
+  'curl',
+#  'code',
+  'hplip-gui',
+  'hplip',
+  'hplip-data',
+  'printer-driver-hpijs',
+  'libsane-hpaio',
+  'ssh-askpass',
+  'keychain',
+  'ncdu'
+]
+
+libreofficelist: [
+  'libreoffice',
+  'libreoffice-help-en-us',
+  # 'libreoffice-pdfimport',
+  'libreoffice-style-breeze',
+  'mythes-en-us',
+  'hunspell-en-us',
+  'hunspell-nl',
+  'hyphen-en-us',
+  'hyphen-nl'
+]

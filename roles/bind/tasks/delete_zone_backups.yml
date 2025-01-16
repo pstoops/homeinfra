@@ -1,0 +1,22 @@
+---
+- name: Find all zone file backups, sorted by date (oldest first) # noqa: no-changed-when
+  ansible.builtin.shell:
+    cmd: find /etc/bind -type f -regex '.*\.zone\..*' -printf "%T+\t%p\n" | sort | awk '{print $2}'
+  register: all_files
+
+- name: Print everything but the last 2 entries
+  ansible.builtin.debug:
+    var: all_files.stdout_lines[:-2]
+
+- name: Print only the last 2 entries (most recent)
+  ansible.builtin.debug:
+    var: all_files.stdout_lines[-2:]
+
+- name: File removal using a loop
+  vars:
+    oldfiles: "{{ all_files.stdout_lines[:-2] }}"
+  when: (oldfiles|length) > 0
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: absent
+  loop: "{{ oldfiles }}"

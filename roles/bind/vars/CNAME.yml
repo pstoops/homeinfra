@@ -1,0 +1,8 @@
+---
+# noqa: var-naming
+CNAME: {
+  www: "nucweb.home.taurus",
+  glpi: "nucweb.home.taurus",
+  wiki: "nucweb.home.taurus",
+  rackmonkey: "nucweb.home.taurus"
+}

@@ -1,0 +1,6 @@
+## nucmgmt host variables
+ansible_host: nucmgmt.home.taurus
+infra_functions:
+  - bind
+  - tftp
+  - pxe

@@ -1,0 +1,13 @@
+---
+bindsoftware: [
+  "bind9",
+  "bind9-dnsutils",
+  "bind9-libs",
+  "bind9-utils",
+  "bind9-host",
+  "bind9utils"
+]
+bindlogdir: "/var/log/bind"
+bindcfgdir: "/etc/bind"
+
+allowed_subnets: "192.168.1.0/24"

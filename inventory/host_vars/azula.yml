@@ -1,0 +1,7 @@
+## azula host variables
+ansible_host: azula.home.taurus
+userlist:
+  - peter
+  - jarne
+infra_functions:
+  - desktop

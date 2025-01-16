@@ -1,0 +1,4 @@
+## nuc host variables
+ansible_host: nuc.home.taurus
+infra_functions:
+  - proxmox

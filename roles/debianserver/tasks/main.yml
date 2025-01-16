@@ -1,0 +1,13 @@
+---
+# tasks file for debianserver
+- name: Set the Debian Apt Mirror
+  ansible.builtin.template:
+    dest: /etc/apt/sources.list
+    src: sources.list.j2
+    backup: true
+    mode: '0644'
+    owner: root
+    group: root
+  become: true
+  tags:
+    - configure

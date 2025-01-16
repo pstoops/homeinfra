@@ -1,0 +1,12 @@
+//
+// Do any local configuration here
+//
+
+// Consider adding the 1918 zones here, if they are not used in your
+// organization
+include "{{ bindcfgdir }}/zones.rfc1918";
+
+include "{{ bindcfgdir }}/named.conf.internal-zones";
+acl internal-network {
+    192.168.0.0/16;
+};

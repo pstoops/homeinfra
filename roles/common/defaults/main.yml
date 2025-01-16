@@ -1,0 +1,23 @@
+---
+# defaults file for common
+userdefinitions:
+  - name: peter
+    userid: 1000
+    fullname: "Peter Stoops"
+    email: "peterstoops@gmail.com"
+  - name: jarne
+    userid: 1001
+    fullname: "Jarne Stoops"
+    email: "jarnestoops@gmail.com"
+  - name: rune
+    userid: 1002
+    fullname: "Rune Stoops"
+    email: "runestoops@gmail.com"
+  - name: tiego
+    userid: 1003
+    fullname: "Tiego Stoops"
+    email: "tiegostoops@gmail.com"
+  - name: ilse
+    userid: 1004
+    fullname: "Ilse Rosseau"
+    email: "ilserosseau@gmail.com"

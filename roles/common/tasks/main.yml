@@ -1,0 +1,14 @@
+---
+# tasks file for common
+- name: Include task to create mandatory users
+  ansible.builtin.include_tasks:
+    file: users.yml
+  tags:
+    - users
+
+- name: Install sudo package
+  ansible.builtin.apt:
+    name: sudo
+    update_cache: true
+    cache_valid_time: 3600
+    state: latest # noqa: package-latest

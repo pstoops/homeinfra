@@ -1,0 +1,6 @@
+---
+# defaults file for newvm
+vmdomain: "home.taurus"
+dnsserver: "192.168.1.6"
+subnetmask: "255.255.255.0"
+gateway: "192.168.1.1"

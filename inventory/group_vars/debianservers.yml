@@ -1,0 +1,12 @@
+apt_mirror: http://ftp.belnet.be/debian
+baseapps: [
+  "ncdu",
+  "htop",
+  "vim",
+  "curl",
+  "ca-certificates"
+  ]
+
+deleteapps: [
+  "nano"
+  ]

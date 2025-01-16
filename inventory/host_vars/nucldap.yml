@@ -1,0 +1,4 @@
+## nucldap host variables
+ansible_host: nucldap.home.taurus
+infra_functions:
+  - ldap

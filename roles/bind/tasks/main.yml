@@ -1,0 +1,25 @@
+---
+- name: Get zones and A,CNAME records, and possible new serial
+  ansible.builtin.include_vars: "{{ item }}"
+  with_items:
+    - "main.yml"
+    - "zones_all.yml"
+    - "zones_std.yml"
+    - "zones_rvs.yml"
+    - "A.yml"
+    - "CNAME.yml"
+  tags:
+    - bind
+    - bind-base
+    - bind-update
+
+- name: Include base ansible.builtin.include_tasks
+  ansible.builtin.include_tasks: base.yml
+  tags:
+    - bind
+    - bind-base
+- name: Include zone update tasks
+  ansible.builtin.include_tasks: update.yml
+  tags:
+    - bind
+    - bind-update

@@ -1,0 +1,40 @@
+---
+- name: Site deploy playbook for taurus.home
+  hosts: linux
+  become: true
+  gather_facts: false
+
+  tasks:
+    - name: Deploy common role
+      ansible.builtin.include_role:
+        name: common
+      tags:
+        - common
+
+    - name: Deploy Debian default role
+      ansible.builtin.include_role:
+        name: debianserver
+      when: inventory_hostname in groups["debianservers"]
+      tags:
+        - debianserver
+        - common
+
+    - name: Gather facts now that base is set up
+      ansible.builtin.setup:
+
+    - name: Deploy bind role
+      ansible.builtin.include_role:
+        name: bind
+      when: '"bind" in infra_functions'
+      tags:
+        - common
+        - debianserver
+        - bind-base
+        - bind-update
+
+
+    - name: Deploy ProxMox role
+      ansible.builtin.include_role:
+        name: proxmox
+      # when: inventory_hostname in groups["pvenodes"]
+      when: '"proxmox" in infra_functions'

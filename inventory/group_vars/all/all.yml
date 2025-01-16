@@ -1,0 +1,10 @@
+## Variables applicable to ALL inventory hosts
+__TIMEZONE: "Europe/Brussels"
+__DNSDOMAIN: "home.taurus"
+__ANSADMIN: "taurusadmin"
+__ANSADMINUID: 1100
+__ADMINGRP: "taurusadmin"
+__ADMINGRPGID: 1100
+__ANSADMINPUBKEY: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOgrFDfZmbs9eYxGTDyfq4PuGpXOjAueto531gtlrVl/ taurusadmin@home.taurus"
+
+smb_workgroup: TAURUS
