@@ -1,4 +1,13 @@
 ## nuc host variables
+apt_mirror: http://ftp.belnet.be/debian
 ansible_host: nuc.home.taurus
 infra_functions:
   - proxmox
+
+# __backupincludes:
+# __backupexcludes:
+# __backupprexec: 
+# __backuppostexec:
+__schedule_backup: false
+__backup_sched_hour: 23
+__backup_sched_minute: 0

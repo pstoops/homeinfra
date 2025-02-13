@@ -1,0 +1,34 @@
+REMOTE_USER=backupuser
+REMOTE_SERVER="dsbob.home.taurus"
+REMOTE_PATH="/volume1/backup/`hostname`"
+LOG_FILE="/var/log/rsyncbackup.log"
+INCLUDE=(
+{% if __backupincludes is defined %}
+{% for item in __backupincludes %}
+  "{{ item }}"
+{% endfor %}
+{% endif %}
+)
+EXCLUDE=(
+{% if __backupexcludes is defined %}
+{% for item in __backupexcludes %}
+  "{{ item }}"
+{% endfor %}
+{% endif %}
+)
+EMAIL="peterstoops@gmail.com"
+SSHKEY="/root/.ssh/id_ed25519_backup"
+PREEXEC=(
+{% if __backupprexec is defined %}
+{% for item in __backupprexec %}
+  "{{ item }}"
+{% endfor %}
+{% endif %}
+)
+POSTEXEC=(
+{% if __backuppostexec is defined %}
+{% for item in __backuppostexec %}
+  "{{ item }}"
+{% endfor %}
+{% endif %}
+)

@@ -4,6 +4,9 @@
   become: true
   gather_facts: false
 
+  vars:
+    - ansible_ssh_private_key_file: ./taurusadmin_id_ed25519
+
   tasks:
     - name: Deploy common role
       ansible.builtin.include_role:
@@ -38,3 +41,8 @@
         name: proxmox
       # when: inventory_hostname in groups["pvenodes"]
       when: '"proxmox" in infra_functions'
+
+    - name: Deploy Docker role
+      ansible.builtin.include_role:
+        name: docker
+      when: '"docker" in infra_functions'

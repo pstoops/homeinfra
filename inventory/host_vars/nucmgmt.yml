@@ -4,3 +4,30 @@ infra_functions:
   - bind
   - tftp
   - pxe
+
+__backupincludes:
+  - "/home/peter" 
+  - "/etc/bind"
+  - "/var/tmp/*.sql"
+
+__backupexcludes:
+  - "cache"
+  - "**.cache"
+  - "**.log"
+  - "tmp"
+  - "**.tmp"
+  - "**.iso"
+
+__backupprexec: 
+  - "mariadb-dump -u admin_backup -p1QAZ2wsx -l -x -e -B glpidb > /var/tmp/glpidb.sql"
+  - "mariadb-dump -u admin_backup -p1QAZ2wsx -l -x -e -B ciscmdb > /var/tmp/ciscmdb.sql"
+  - "mariadb-dump -u admin_backup -p1QAZ2wsx -l -x -e -B plantdb > /var/tmp/plantdb.sql"
+
+__backuppostexec:
+  - "rm -f /var/tmp/glpidb.sql"
+  - "rm -f /var/tmp/glpidb.sql"
+  - "rm -f /var/tmp/glpidb.sql"
+
+__schedule_backup: true
+__backup_sched_hour: 23
+__backup_sched_minute: 0

@@ -2,3 +2,10 @@
 ansible_host: nucweb.home.taurus
 infra_functions:
   - webserver
+
+__backupincludes:
+  - "/var/www"
+  - "/home/solarlogger"
+__schedule_backup: true
+__backup_sched_hour: 23
+__backup_sched_minute: 20

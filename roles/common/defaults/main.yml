@@ -5,19 +5,37 @@ userdefinitions:
     userid: 1000
     fullname: "Peter Stoops"
     email: "peterstoops@gmail.com"
+    pwdhash: "$6$GW9NqomgyhL6nGh8$rii1Vp0Mbh1skdJdx.Sya640PeWzplJ3e8xXSmBjQx4Jbz3LBhHUk7m55poRLFjzFlIVpPMk55kwzJU32WYgV1"
+    usergroups: "sudo"
   - name: jarne
     userid: 1001
     fullname: "Jarne Stoops"
     email: "jarnestoops@gmail.com"
+    pwdhash: "$6$tx8vLu6AUQb.Kijp$A8WDmIM7NN4z1PbA87JfAjDfCAi3LoYGizU6FPBinlbHzMbPBS0w.u.qR0CI.Y/8TqmODmBq58UFcmdv98S6o0"
+    usergroups:
   - name: rune
     userid: 1002
     fullname: "Rune Stoops"
     email: "runestoops@gmail.com"
+    pwdhash: "$6$YFDP9qyyWj5vG5Rf$4YOEvYyorMbAgzaY8WkbD.422kbcewBWetWM1ji8r848HjSfqfykvIbNCHW7iOqap.uFFZJ9N805oOd8P6Rtg1"
+    usergroups:
   - name: tiego
     userid: 1003
     fullname: "Tiego Stoops"
     email: "tiegostoops@gmail.com"
+    pwdhash: "$6$YFDP9qyyWj5vG5Rf$4YOEvYyorMbAgzaY8WkbD.422kbcewBWetWM1ji8r848HjSfqfykvIbNCHW7iOqap.uFFZJ9N805oOd8P6Rtg1"
+    usergroups:
   - name: ilse
     userid: 1004
     fullname: "Ilse Rosseau"
     email: "ilserosseau@gmail.com"
+    pwdhash: "$6$Wi3VwFZvoHEolXNl$eWCYK/lzQ8SSPIatXt7UqOJv8RnaLtr0OollgjqhUjJbPYjAb3/9AHar5f5uvtf9Q3BKr2VasimE.fHiaTeIb0"
+    usergroups:
+
+commongroup: grptaurus
+commongid: 2000
+
+defaultsoftware: [
+  "acl",
+  "rsync"
+]

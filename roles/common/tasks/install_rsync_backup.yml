@@ -1,0 +1,67 @@
+---
+- name: Prepare directory for rsync backup tool
+  ansible.builtin.file:
+    path: /opt/backup
+    state: directory
+    owner: root
+    group: "{{ commongroup }}"
+    mode: '0770'
+  tags:
+    - common
+    - backup
+
+- name: Copy backup script
+  ansible.builtin.copy:
+    src: backup.sh
+    dest: /opt/backup/backup.sh
+    owner: root
+    group: "{{ commongroup }}"
+    mode: '0770'
+  tags:
+    - common
+    - backup
+
+- name: Copy backup configuration
+  ansible.builtin.template:
+    src: backup.cfg.j2
+    dest: /opt/backup/backup.cfg
+    owner: root
+    group: "{{ commongroup }}"
+    mode: '0660'
+  tags:
+    - common
+    - backup
+
+- name: Prepare users .ssh directory
+  ansible.builtin.file:
+    path: /root/.ssh
+    state: directory
+    owner: root
+    group: root
+    mode: '0700'
+  tags:
+    - common
+    - backup
+
+- name: Put SSH key for backup in place
+  ansible.builtin.copy:
+    src: id_ed25519
+    dest: /root/.ssh/id_ed25519_backup
+    owner: root
+    group: root
+    mode: '0600'
+  tags:
+    - common
+    - backup
+
+- name: Schedule daily backup job
+  ansible.builtin.cron:
+    name: "Daily backup"
+    minute: "{{ __backup_sched_minute }}"
+    hour: "{{ __backup_sched_hour }}"
+    job: "/opt/backup/backup.sh > /dev/null"
+    user: root
+  when: __schedule_backup
+  tags:
+    - common
+    - backup

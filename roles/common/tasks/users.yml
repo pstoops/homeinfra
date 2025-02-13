@@ -40,3 +40,30 @@
     mode: '0440'
   tags:
     - users
+
+- name: Add common group
+  ansible.builtin.group:
+    name: "{{ commongroup }}"
+    state: present
+    gid: "{{ commongid }}"
+  become: true
+  tags:
+    - users
+
+- name: Add other users
+  ansible.builtin.user:
+    name: "{{ item.name }}"
+    state: present
+    shell: /bin/bash
+    comment: "{{ item.fullname }}"
+    append: true
+    createhome: true
+    groups: "{{ item.usergroups }}, {{ commongroup }}"
+    home: "/home/{{ item.name }}"
+    password: "{{ item.pwdhash }}"
+    update_password: on_create
+  become: true
+  ignore_errors: "{{ ansible_check_mode }}"
+  tags:
+    - users
+  with_items: "{{ userdefinitions }}"

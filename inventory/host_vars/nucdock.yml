@@ -1,0 +1,20 @@
+## nucdock host variables
+ansible_host: nucdock.home.taurus
+infra_functions:
+  - docker
+
+__backupincludes:
+  - "/home/peter" 
+  - "/opt/docker/*/*yml"
+
+__backupexcludes:
+  - "cache"
+  - "**.cache"
+  - "**.log"
+  - "tmp"
+  - "**.tmp"
+  - "**.iso"
+
+__schedule_backup: true
+__backup_sched_hour: 23
+__backup_sched_minute: 10

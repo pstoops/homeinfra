@@ -11,3 +11,28 @@
   become: true
   tags:
     - configure
+
+- name: Update the Apt Cache
+  ansible.builtin.apt:
+    update_cache: true
+  become: true
+  tags:
+    - apps
+    - configure
+  check_mode: false
+
+- name: Remove unnecessary packages
+  ansible.builtin.apt:
+    name: "{{ deleteapps }}"
+    state: absent
+  become: true
+  tags: apps
+  ignore_errors: "{{ ansible_check_mode }}"
+
+- name: Ensure personal Applications and Plugins are Installed
+  ansible.builtin.apt:
+    name: "{{ baseapps }}"
+    state: present
+  become: true
+  tags: apps
+  ignore_errors: "{{ ansible_check_mode }}"

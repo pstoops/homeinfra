@@ -12,3 +12,9 @@
     update_cache: true
     cache_valid_time: 3600
     state: latest # noqa: package-latest
+
+- name: Install rsync backup solution
+  ansible.builtin.include_tasks:
+    file: install_rsync_backup.yml
+  tags:
+    - backup

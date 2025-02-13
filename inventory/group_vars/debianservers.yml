@@ -4,7 +4,9 @@ baseapps: [
   "htop",
   "vim",
   "curl",
-  "ca-certificates"
+  "ca-certificates",
+  "acl",
+  "rsync"
   ]
 
 deleteapps: [
