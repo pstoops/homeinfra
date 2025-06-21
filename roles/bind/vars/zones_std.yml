@@ -1,4 +1,4 @@
 ---
-standard_zones:
-  - domain: home.taurus
-    file: home.taurus.zone
+standard_zones: 
+  - zonename: home.taurus
+    zonefile: home.taurus.zone

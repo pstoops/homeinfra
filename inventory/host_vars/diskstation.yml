@@ -1,0 +1,10 @@
+## diskstation host variables
+ansible_host: diskstation.home.taurus
+infra_functions:
+  - nas
+
+fct_description: "diskstation NAS"
+fct_conn_method: "ssh"
+fct_gen_script: true
+
+ansible_user: peter

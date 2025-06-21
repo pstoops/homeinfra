@@ -11,3 +11,7 @@ infra_functions:
 __schedule_backup: false
 __backup_sched_hour: 23
 __backup_sched_minute: 0
+
+fct_description: "proxmox server"
+fct_conn_method: "ssh"
+fct_gen_script: true

@@ -2,3 +2,5 @@
 all_zones_list:
   - home.taurus
   - '1.168.192.in-addr.arpa'
+  - '15.10.10.in-addr.arpa'
+  - '20.10.10.in-addr.arpa'

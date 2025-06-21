@@ -1,0 +1,4 @@
+#!/bin/bash
+TERMINAL=/usr/bin/xfce4-terminal
+DT=`date +%Y%m%d_%H%M`
+$TERMINAL --title=`"{{ inventory_hostname_short }} - {{ fct_description }}"  -x ssh -A -X -o strictHostKeyChecking=no -o ServerAliveInterval=30 {{ ansible_host }}

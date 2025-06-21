@@ -1,0 +1,17 @@
+;{{ ansible_managed }}
+$ORIGIN .
+$TTL 86400	; 1 day
+15.10.10.in-addr.arpa	IN SOA	nucmgmt.home.taurus. root.home.taurus. (
+				{{ bind9_serial_new }} ; Serial
+				3600       ; refresh (1 hour)
+				60         ; retry (1 minute)
+				604800     ; expire (1 week)
+				3600       ; minimum (1 hour)
+				)
+			NS	nucmgmt.home.taurus.
+			A	255.255.255.0
+			PTR	home.taurus.
+$ORIGIN 15.10.10.in-addr.arpa.
+{% for name, addr in ptr_15_10_10.items() %}
+{{ name }}			PTR	{{ addr }}
+{% endfor %}

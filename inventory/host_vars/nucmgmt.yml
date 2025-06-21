@@ -1,5 +1,10 @@
 ## nucmgmt host variables
 ansible_host: nucmgmt.home.taurus
+
+fct_description: "management"
+fct_conn_method: "ssh"
+fct_gen_script: true
+
 infra_functions:
   - bind
   - tftp

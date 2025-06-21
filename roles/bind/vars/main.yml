@@ -10,4 +10,4 @@ bindsoftware: [
 bindlogdir: "/var/log/bind"
 bindcfgdir: "/etc/bind"
 
-allowed_subnets: "192.168.1.0/24"
+allowed_subnets: "192.168.0.0/16; 10.10.15.0/24; 10.10.20.0/24"

@@ -1,6 +1,6 @@
 ---
 - name: Get PTR records
-  ansible.builtin.include_vars: "{{ item.domain }}.yml"
+  ansible.builtin.include_vars: "{{ item.zonename }}.yml"
   with_items:
     - "{{ reverse_zones }}"
   tags:
@@ -9,9 +9,9 @@
 
 - name: Create backup copies of all zone files
   ansible.builtin.copy:
-    src: "{{ bindcfgdir }}/{{ item.file }}"
+    src: "{{ bindcfgdir }}/{{ item.zonefile }}"
     remote_src: true
-    dest: "{{ bindcfgdir }}/{{ item.file }}.{{ ansible_date_time.iso8601_basic_short }}"
+    dest: "{{ bindcfgdir }}/{{ item.zonefile }}.{{ ansible_date_time.iso8601_basic_short }}"
     mode: '0644'
     owner: root
     group: bind
@@ -21,6 +21,7 @@
   tags:
     - bind
     - bind-update
+  ignore_errors: true
 
 - name: Update forward zone files
   ansible.builtin.include_tasks:

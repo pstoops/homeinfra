@@ -46,3 +46,8 @@
       ansible.builtin.include_role:
         name: docker
       when: '"docker" in infra_functions'
+
+    - name: Deploy Desktop role
+      ansible.builtin.include_role:
+        name: desktop
+      when: '"desktop" in infra_functions'

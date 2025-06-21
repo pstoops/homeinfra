@@ -1,0 +1,15 @@
+---
+- name: Generate remote connection scripts
+  hosts: all
+  become: false
+  gather_facts: false
+  tasks:
+    - name: Create connection script
+      ansible.builtin.template:
+        src: connscript_ssh.j2
+        dest: "/home/peter/scripts/{{ inventory_hostname_short }}"
+        owner: peter
+        group: peter
+        mode: '0770'
+      when: fct_gen_script and fct_conn_method == "ssh"
+      delegate_to: localhost

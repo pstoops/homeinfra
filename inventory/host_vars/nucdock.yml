@@ -18,3 +18,7 @@ __backupexcludes:
 __schedule_backup: true
 __backup_sched_hour: 23
 __backup_sched_minute: 10
+
+fct_description: "docker server"
+fct_conn_method: "ssh"
+fct_gen_script: true

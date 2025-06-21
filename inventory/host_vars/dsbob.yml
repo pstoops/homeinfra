@@ -1,0 +1,10 @@
+## dsbob host variables
+ansible_host: dsbob.home.taurus
+infra_functions:
+  - nas
+
+fct_description: "dsbob NAS"
+fct_conn_method: "ssh"
+fct_gen_script: true
+
+ansible_user: peter

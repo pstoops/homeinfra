@@ -1,4 +1,8 @@
 ---
-reverse_zones:
-  - domain: '1.168.192.in-addr.arpa'
-    file: '1.168.192.in-addr.arpa.zone'
+reverse_zones: 
+  - zonename: '1.168.192.in-addr.arpa'
+    zonefile: '1.168.192.in-addr.arpa.zone'
+  - zonename: '15.10.10.in-addr.arpa'
+    zonefile: '15.10.10.in-addr.arpa.zone'
+  - zonename: '20.10.10.in-addr.arpa'
+    zonefile: '20.10.10.in-addr.arpa.zone'

@@ -1,2 +1,17 @@
 ---
 # tasks file for desktop
+- name: Ensure personal Applications and Plugins are Installed
+  ansible.builtin.package:
+    name: "{{ applist }}"
+    state: present
+  become: true
+  tags: apps
+  ignore_errors: "{{ ansible_check_mode }}"
+
+- name: Ensure LibreOffice is Installed
+  ansible.builtin.package:
+    name: "{{ libreofficelist }}"
+    state: present
+  become: true
+  tags: apps
+  ignore_errors: "{{ ansible_check_mode }}"

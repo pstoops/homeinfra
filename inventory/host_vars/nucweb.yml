@@ -9,3 +9,7 @@ __backupincludes:
 __schedule_backup: true
 __backup_sched_hour: 23
 __backup_sched_minute: 20
+
+fct_description: "webserver"
+fct_conn_method: "ssh"
+fct_gen_script: true

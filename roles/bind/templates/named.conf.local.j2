@@ -9,4 +9,6 @@ include "{{ bindcfgdir }}/zones.rfc1918";
 include "{{ bindcfgdir }}/named.conf.internal-zones";
 acl internal-network {
     192.168.0.0/16;
+    10.10.15.0/24;
+    10.10.20.0/24;
 };

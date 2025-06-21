@@ -1,5 +1,5 @@
 ## libredeb host variables
-ansible_host: libredeb.home.taurus
+ansible_host: lt580deb.home.taurus
 userlist:
   - peter
 infra_functions:
@@ -8,3 +8,4 @@ infra_functions:
 fct_description: "laptop Peter"
 fct_conn_method: "ssh"
 fct_gen_script: true
+__schedule_backup: false

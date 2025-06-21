@@ -5,3 +5,7 @@ userlist:
   - jarne
 infra_functions:
   - desktop
+
+fct_description: "desktop Jarne"
+fct_conn_method: "ssh"
+fct_gen_script: true

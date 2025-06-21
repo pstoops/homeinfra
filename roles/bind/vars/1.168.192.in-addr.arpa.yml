@@ -11,7 +11,6 @@ ptr_1_168_192: {
   20: "nuc.home.taurus",
   21: "tksnipeit.home.taurus",
   23: "nucweb.home.taurus",
-  24: "nucldap.home.taurus",
   31: "nucfed.home.taurus",
   27: "w10pro.home.taurus",
   60: "beest.home.taurus",
@@ -21,5 +20,6 @@ ptr_1_168_192: {
   192: "nuccb1.home.taurus",
   228: "nucdock.home.taurus",
   230: "influxdb.home.taurus",
-  246: "azula.home.taurus"
+  246: "azula.home.taurus",
+  101: "lt580deb.home.taurus"
 }

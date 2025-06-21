@@ -3,15 +3,15 @@
   ansible.builtin.include_tasks:
     file: getzoneserial.yml
   vars:
-    zonefile: "{{ item.file }}"
+    zonefile: "{{ item.zonefile }}"
   tags:
     - bind
     - bind-update
 
 - name: Create zone configuration files
   ansible.builtin.template:
-    src: "{{ item.file }}.j2"
-    dest: "{{ bindcfgdir }}/{{ item.file }}"
+    src: "{{ item.zonefile }}.j2"
+    dest: "{{ bindcfgdir }}/{{ item.zonefile }}"
     owner: root
     group: bind
     mode: '0644'

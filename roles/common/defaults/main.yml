@@ -2,7 +2,7 @@
 # defaults file for common
 userdefinitions:
   - name: peter
-    userid: 1000
+    userid: 1026
     fullname: "Peter Stoops"
     email: "peterstoops@gmail.com"
     pwdhash: "$6$GW9NqomgyhL6nGh8$rii1Vp0Mbh1skdJdx.Sya640PeWzplJ3e8xXSmBjQx4Jbz3LBhHUk7m55poRLFjzFlIVpPMk55kwzJU32WYgV1"

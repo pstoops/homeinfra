@@ -1,4 +1,14 @@
 ---
+- name: Gather facts, as we need the for the ansible date_time
+  ansible.builtin.setup:
+    gather_subset:
+      - "date_time"
+  when: ansible_date_time is not defined
+  tags:
+    - bind
+    - bind-base
+    - bind-update
+
 - name: Get zones and A,CNAME records, and possible new serial
   ansible.builtin.include_vars: "{{ item }}"
   with_items:
