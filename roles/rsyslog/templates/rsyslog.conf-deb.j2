@@ -1,0 +1,185 @@
+## {{ ansible_managed }}
+
+#  /etc/rsyslog.conf	Configuration file for rsyslog.
+#
+#			For more information see
+#			/usr/share/doc/rsyslog-doc/html/rsyslog_conf.html
+
+
+#################
+#### MODULES ####
+#################
+
+{% if ansible_distribution_major_version|int >= 9 %}
+module(load="imuxsock") # provides support for local system logging
+module(load="imklog")   # provides kernel logging support
+#module(load="immark")  # provides --MARK-- message capability
+{% else %}
+$ModLoad imuxsock # provides support for local system logging
+$ModLoad imklog   # provides kernel logging support
+#$ModLoad immark  # provides --MARK-- message capability
+{% endif %}
+
+{% if rsyslog_system_log_rate_limit_interval is defined or rsyslog_system_log_rate_limit_burst is defined %}
+$SystemLogRateLimitInterval {{ rsyslog_system_log_rate_limit_interval | default(0) }}
+$SystemLogRateLimitBurst {{ rsyslog_system_log_rate_limit_burst | default(0) }}
+
+{% endif %}
+# provides UDP syslog reception
+{% if ansible_distribution_major_version|int >= 9 %}
+{% if not rsyslog_udp_server | default(false) %}#{% endif %}module(load="imudp")
+{% if not rsyslog_udp_server | default(false) %}#{% endif %}input(type="imudp" port="514")
+{% else %}
+{% if not rsyslog_udp_server | default(false) %}#{% endif %}$ModLoad imudp
+{% if not rsyslog_udp_server | default(false) %}#{% endif %}$UDPServerRun {{ rsyslog_udp_server_port | default(514) }}
+{% endif %}
+
+# provides TCP syslog reception
+{% if ansible_distribution_major_version|int >= 9 %}
+{% if not rsyslog_udp_server | default(false) %}#{% endif %}module(load="imtcp")
+{% if not rsyslog_udp_server | default(false) %}#{% endif %}input(type="imtcp" port="514")
+{% else %}
+{% if not rsyslog_tcp_server | default(false) %}#{% endif %}$ModLoad imtcp
+{% if not rsyslog_tcp_server | default(false) %}#{% endif %}$InputTCPServerRun {{ rsyslog_tcp_server_port | default(514) }}
+{% endif %}
+
+
+###########################
+#### GLOBAL DIRECTIVES ####
+###########################
+
+#
+# Use traditional timestamp format.
+# To enable high precision timestamps, comment out the following line.
+#
+$ActionFileDefaultTemplate RSYSLOG_TraditionalFileFormat
+
+#
+# Set the default permissions for all log files.
+#
+$FileOwner root
+$FileGroup adm
+$FileCreateMode 0640
+$DirCreateMode 0755
+$Umask 0022
+
+#
+# Where to place spool and state files
+#
+$WorkDirectory /var/spool/rsyslog
+
+#
+# Include all config files in /etc/rsyslog.d/
+#
+$IncludeConfig /etc/rsyslog.d/*.conf
+
+
+###############
+#### RULES ####
+###############
+{% for rule in rsyslog_custom_rules | default([]) %}
+
+{{ rule }}
+{%- endfor %}
+
+{% if rsyslog_default_rules|default([]) != [] %}
+{% for rule in rsyslog_default_rules | default([]) %}
+{{ rule }}
+
+{% endfor %}
+{% else %}
+#
+# First some standard log files.  Log by facility.
+#
+auth,authpriv.*			/var/log/auth.log
+*.*;auth,authpriv.none		-/var/log/syslog
+#cron.*				/var/log/cron.log
+daemon.*			-/var/log/daemon.log
+kern.*				-/var/log/kern.log
+lpr.*				-/var/log/lpr.log
+mail.*				-/var/log/mail.log
+user.*				-/var/log/user.log
+
+#
+# Logging for the mail system.  Split it up so that
+# it is easy to write scripts to parse these files.
+#
+mail.info			-/var/log/mail.info
+mail.warn			-/var/log/mail.warn
+mail.err			/var/log/mail.err
+
+{% if ansible_distribution_major_version|int <= 8 %}
+#
+# Logging for INN news system.
+#
+news.crit			/var/log/news/news.crit
+news.err			/var/log/news/news.err
+news.notice			-/var/log/news/news.notice
+
+{% endif %}
+#
+# Some "catch-all" log files.
+#
+*.=debug;\
+	auth,authpriv.none;\
+	news.none;mail.none	-/var/log/debug
+*.=info;*.=notice;*.=warn;\
+	auth,authpriv.none;\
+	cron,daemon.none;\
+	mail,news.none		-/var/log/messages
+
+#
+# Emergencies are sent to everybody logged in.
+#
+*.emerg			:omusrmsg:*
+
+{% if ansible_distribution_major_version|int <= 8 %}
+#
+# I like to have messages displayed on the console, but only on a virtual
+# console I usually leave idle.
+#
+#daemon,mail.*;\
+#	news.=crit;news.=err;news.=notice;\
+#	*.=debug;*.=info;\
+#	*.=notice;*.=warn	/dev/tty8
+
+# The named pipe /dev/xconsole is for the `xconsole' utility.  To use it,
+# you must invoke `xconsole' with the `-file' option:
+#
+#    $ xconsole -file /dev/xconsole [...]
+#
+# NOTE: adjust the list below, or you'll go crazy if you have a reasonably
+#	busy site..
+#
+daemon.*;mail.*;\
+	news.err;\
+	*.=debug;*.=info;\
+	*.=notice;*.=warn	|/dev/xconsole
+
+{% endif %}
+{% endif %}
+{% for rule in rsyslog_additional_log_settings | default([]) %}
+
+{{ rule }}
+{%- endfor %}
+
+
+# ### begin forwarding rule ###
+# The statement between the begin ... end define a SINGLE forwarding
+# rule. They belong together, do NOT split them. If you create multiple
+# forwarding rules, duplicate the whole block!
+# Remote Logging (we use TCP for reliable delivery)
+#
+# An on-disk queue is created for this action. If the remote host is
+# down, messages are spooled to disk and sent when it is up again.
+{% if not rsyslog_remote_log_queuing | default(false) %}#{% endif %}$ActionQueueFileName {{ rsyslog_remote_log_queue_file_name | default("fwdRule1") }} # unique name prefix for spool files
+{% if not rsyslog_remote_log_queuing | default(false) %}#{% endif %}$ActionQueueMaxDiskSpace {{ rsyslog_remote_log_queue_max_disk_space | default("1g") }}   # 1gb space limit (use as much as possible)
+{% if not rsyslog_remote_log_queuing | default(false) %}#{% endif %}$ActionQueueSaveOnShutdown {{ rsyslog_remote_log_queue_save_on_shutdown | default("on") }} # save messages to disk on shutdown
+{% if not rsyslog_remote_log_queuing | default(false) %}#{% endif %}$ActionQueueType {{ rsyslog_remote_log_queue_type | default("LinkedList") }}   # run asynchronously
+{% if not rsyslog_remote_log_queuing | default(false) %}#{% endif %}$ActionResumeRetryCount {{ rsyslog_remote_log_resume_retry_count | default("-1") }}    # infinite retries if host is down
+# remote host is: name/ip:port, e.g. 192.168.0.1:514, port optional
+#*.* @@remote-host:514
+{% for log_destination in rsyslog_remote_log_destinations %}
+{{ log_destination }}
+{% endfor %}
+# ### end of the forwarding rule ###

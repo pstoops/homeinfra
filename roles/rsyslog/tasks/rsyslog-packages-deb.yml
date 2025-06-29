@@ -1,0 +1,11 @@
+---
+# Debian packages tasks file for rsyslog
+
+- name: "Debian | Packages | Install rsyslog required packages"
+  ansible.builtin.package:
+    name: "{{ rsyslog_packages }}"
+    state: "{{ rsyslog_package_state }}"
+    # update_cache: yes
+  when:
+    ansible_os_family == "Debian"
+  tags: ["rsyslog", "packages"]

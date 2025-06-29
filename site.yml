@@ -2,7 +2,7 @@
 - name: Site deploy playbook for taurus.home
   hosts: linux
   become: true
-  gather_facts: false
+  gather_facts: true
 
   vars:
     - ansible_ssh_private_key_file: ./taurusadmin_id_ed25519
@@ -42,10 +42,10 @@
       # when: inventory_hostname in groups["pvenodes"]
       when: '"proxmox" in infra_functions'
 
-    - name: Deploy Docker role
-      ansible.builtin.include_role:
-        name: docker
-      when: '"docker" in infra_functions'
+    # - name: Deploy Docker role
+    #   ansible.builtin.include_role:
+    #     name: docker
+    #   when: '"docker" in infra_functions'
 
     - name: Deploy Desktop role
       ansible.builtin.include_role:

@@ -36,3 +36,7 @@
   become: true
   tags: apps
   ignore_errors: "{{ ansible_check_mode }}"
+
+- name: Configure system logging
+  ansible.builtin.include_role:
+    name: rsyslog

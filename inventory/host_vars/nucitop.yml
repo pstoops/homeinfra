@@ -1,0 +1,22 @@
+## nucweb host variables
+ansible_host: nucitop.home.taurus
+infra_functions:
+  - webserver
+
+__backupincludes: []
+  # - "/var/www"
+__schedule_backup: false
+__backup_sched_hour: 23
+__backup_sched_minute: 20
+
+__backupprexec: []
+  # - "mkdir -p /var/tmp/ldap_backup"
+  # - "nice /usr/sbin/slapcat -b cn=config > /var/tmp/ldap_backup/config.ldif"
+  # - "nice /usr/sbin/slapcat -b dc=home,dc=taurus > /var/tmp/ldap_backup/home.taurus.ldif"
+  # - "tar -czf /var/tmp/ldap_backup/ldap.tgz /var/tmp/ldap_backup/*.ldif"
+__backuppostexec: []
+  # - "rm -Rf /var/tmp/ldap_backup"
+
+fct_description: "iTop"
+fct_conn_method: "ssh"
+fct_gen_script: true

@@ -1,0 +1,54 @@
+---
+# defaults file for rsyslog
+
+# Packages to install
+rsyslog_packages:
+  - rsyslog
+
+# Package states: ( present | latest )
+rsyslog_package_state: present
+
+# Service name:
+rsyslog_service_name: rsyslog
+
+# Service state: ( started | stopped )
+rsyslog_service_state: started
+
+# Service enabled: ( yes | no )
+rsyslog_service_enabled: true
+
+
+# Enable syslog server
+rsyslog_udp_server: false
+rsyslog_udp_server_port: 514
+rsyslog_tcp_server: false
+rsyslog_tcp_server_port: 514
+
+# Set imuxsock rate limiting
+# rsyslog_system_log_rate_limit_interval: 0
+# rsyslog_system_log_rate_limit_burst: 0
+
+# Override default rules
+rsyslog_default_rules: []
+
+# custom rules
+rsyslog_custom_rules: []
+
+# remote logging
+rsyslog_remote_log_queuing: true
+# unique name prefix for spool files
+rsyslog_remote_log_queue_file_name: fwdRule1
+# 1gb space limit (use as much as possible)
+rsyslog_remote_log_queue_max_disk_space: 1g
+# save messages to disk on shutdown
+rsyslog_remote_log_queue_save_on_shutdown: "on"
+# run asynchronously
+rsyslog_remote_log_queue_type: LinkedList
+# infinite retries if host is down
+rsyslog_remote_log_resume_retry_count: -1
+
+# remote log destinations
+rsyslog_remote_log_destinations: ['*.* @@10.10.20.2:514']
+
+# additional logging settings
+rsyslog_additional_log_settings: []

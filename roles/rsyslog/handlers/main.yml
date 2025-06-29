@@ -1,0 +1,11 @@
+---
+# handlers file for rsyslog
+
+- name: "restart rsyslog"
+  ansible.builtin.service:
+    name: "{{ rsyslog_service_name }}"
+    state: restarted
+  when:
+    # rsyslog_service_enabled == "yes" and
+    rsyslog_service_state == "started"
+  tags: ["rsyslog", "service"]

@@ -1,0 +1,14 @@
+---
+# Debian configuration tasks file for rsyslog
+
+- name: "Debian | Configuration | Install rsyslog configuration files"
+  ansible.builtin.template:
+    src: rsyslog.conf-deb.j2
+    dest: "/etc/rsyslog.conf"
+    owner: root
+    group: root
+    mode: '0644'
+    backup: true
+  notify:
+    - "restart rsyslog"
+  tags: ["rsyslog", "configuration"]
